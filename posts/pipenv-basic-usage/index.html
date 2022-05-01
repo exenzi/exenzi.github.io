@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru" class="theme-dark">
+	<head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-lucario.css">
+		<!-- Global Metadata --><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+<!-- Primary Meta Tags -->
+<title>🐍 Pipenv - npm по-змеиному</title>
+<meta name="title" content="🐍 Pipenv - npm по-змеиному">
+<meta name="description" content="В экосистеме Python есть 2 проблемы. Глобальные пакеты и генерация requirements.txt вручную. Как минимум первую проблему решают venv и Pipenv, но Pipenv также предоставляет больше функционала. Хотя если он вам не нужен, то предпочтительней использовать venv.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url">
+<meta property="og:title" content="🐍 Pipenv - npm по-змеиному">
+<meta property="og:description" content="В экосистеме Python есть 2 проблемы. Глобальные пакеты и генерация requirements.txt вручную. Как минимум первую проблему решают venv и Pipenv, но Pipenv также предоставляет больше функционала. Хотя если он вам не нужен, то предпочтительней использовать venv.">
+<meta property="og:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url">
+<meta property="twitter:title" content="🐍 Pipenv - npm по-змеиному">
+<meta property="twitter:description" content="В экосистеме Python есть 2 проблемы. Глобальные пакеты и генерация requirements.txt вручную. Как минимум первую проблему решают venv и Pipenv, но Pipenv также предоставляет больше функционала. Хотя если он вам не нужен, то предпочтительней использовать venv.">
+<meta property="twitter:image" content="https://astro.build/social.jpg?v=1">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;700&display=swap">
+
+	<link rel="stylesheet" href="/assets/asset.bcb4808c.css"></link>
+</head>
+
+	<body>
+		<header class="wrapper astro-G4HUOJKZ">
+	<article class="astro-G4HUOJKZ">
+		<h1 class="astro-G4HUOJKZ">
+			<a href="/" class="astro-G4HUOJKZ">🍁 Rokitsky.ru</a>
+		</h1>
+	</article>
+</header>
+
+
+
+		<div class="wrapper">
+			<div class="layout astro-YVOLJZNM">
+	<article class="content astro-YVOLJZNM">
+		<div class="astro-YVOLJZNM">
+			<header class="astro-YVOLJZNM">
+				
+				<p class="publish-date astro-YVOLJZNM">20 декабря 2020 г.</p>
+				<h1 class="title astro-YVOLJZNM">🐍 Pipenv - npm по-змеиному</h1>
+				<div class="author astro-KO5QTRDP">
+	<p class="astro-KO5QTRDP"><a href="/" class="astro-KO5QTRDP">@maxrokitsky</a></p>
+</div>
+
+
+
+			</header>
+			<main class="astro-YVOLJZNM">
+				<p>В экосистеме Python есть 2 проблемы:</p><ol>
+<li>Все пакеты устанавливаются глобально и доступны в любом проекте, что ведёт к конфликтам версий. Если один код писался под одну версию, а второй под другую, и между версиями есть значительные отличия, то какой-то код может вызывать ошибку.</li>
+<li>Список пакетов приходится генерировать вручную, т.к. через <code>pip freeze</code> в список также попадут пакеты, которые нам нужны только во время разработки (например pylint и autopep8).</li>
+</ol><p>Как минимум первую проблему решают venv и Pipenv, но Pipenv также предоставляет больше функционала. Хотя если он вам не нужен, то предпочтительней использовать venv.</p><h2 id="зачем-нужно-виртуальное-окружение">Зачем нужно виртуальное окружение</h2><p>Виртуальное окружение позволяет изолироваться от всех глобально установленных пакетов и использовать только нужные пакеты нужных версий. По-сути это просто отдельная папка для каждого проекта, в которую устанавливаются пакеты, нужные только в этом проекте.</p><p><img src="/assets/blog/images/image-20201220231739564.png" alt="image-20201220231739564"></p><p>Также изолируется интерпретатор Python, что позволяет использовать в проекте версию Python отличную от установленной на компьютере по-умолчанию.</p><h2 id="как-использовать-pipenv">Как использовать Pipenv</h2><p>Установка:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9"># Linux</span></span>
+<span class="line"><span style="color: #c9d1d9">pip3 install pipenv</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9"># Windows</span></span>
+<span class="line"><span style="color: #c9d1d9">pip install pipenv</span></span></code></pre><p>Создаём и заходим в папку с проектом:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">mkdir myproject</span></span>
+<span class="line"><span style="color: #c9d1d9">cd myproject</span></span></code></pre><p>Создаём виртуальное окружение:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv install</span></span></code></pre><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">Creating a virtualenv for this project...</span></span>
+<span class="line"><span style="color: #c9d1d9">Pipfile: /home/user/myproject/Pipfile</span></span>
+<span class="line"><span style="color: #c9d1d9">Using /usr/bin/python3.9 (3.9.1) to create virtualenv...</span></span>
+<span class="line"><span style="color: #c9d1d9">⠋ Creating virtual environment...created virtual environment CPython3.9.1.final.0-64 in 639ms</span></span>
+<span class="line"><span style="color: #c9d1d9">&lt; --- &gt;</span></span>
+<span class="line"><span style="color: #c9d1d9">  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator</span></span>
+<span class="line"><span style="color: #c9d1d9"></span></span>
+<span class="line"><span style="color: #c9d1d9">✔ Successfully created virtual environment!</span></span>
+<span class="line"><span style="color: #c9d1d9">Virtualenv location: /home/user/.local/share/virtualenvs/myproject-Ny9jr0AU</span></span>
+<span class="line"><span style="color: #c9d1d9">Creating a Pipfile for this project...</span></span>
+<span class="line"><span style="color: #c9d1d9">Pipfile.lock not found, creating...</span></span>
+<span class="line"><span style="color: #c9d1d9">Locking [dev-packages] dependencies...</span></span>
+<span class="line"><span style="color: #c9d1d9">Locking [packages] dependencies...</span></span>
+<span class="line"><span style="color: #c9d1d9">Updated Pipfile.lock (16c839)!</span></span>
+<span class="line"><span style="color: #c9d1d9">Installing dependencies from Pipfile.lock (16c839)...</span></span>
+<span class="line"><span style="color: #c9d1d9">  🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 0/0 — 00:00:00</span></span>
+<span class="line"><span style="color: #c9d1d9">To activate this project&#39;s virtualenv, run pipenv shell.</span></span>
+<span class="line"><span style="color: #c9d1d9">Alternatively, run a command inside the virtualenv with pipenv run.</span></span></code></pre><p>Виртуальное окружение создано в папке <code>~/.local/share/virtialenvs/</code>.</p><h2 id="активация">Активация</h2><p>Мы всё ещё находимся в глобальном окружении. В этом можно убедиться вызвав <code>pip list</code> и увидим все установленные пакеты. Нам нужно как-то активировать виртуальное окружение.</p><p>Для этого Pipenv создал нам специальные скрипты для разных шеллов. Запускаем скрипт, находясь в папке с проектом:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv shell</span></span></code></pre><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">Launching subshell in virtual environment...</span></span>
+<span class="line"><span style="color: #c9d1d9">./home/user/.local/share/virtualenvs/myproject-Ny9jr0AU/bin/activate</span></span></code></pre><p>В командной строке мы теперь видим название виртуального окружения, в которым мы находимся:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">(myproject) user@hostname: ~/myproject _</span></span></code></pre><h2 id="установка-пакетов">Установка пакетов</h2><p>В Pipenv нужно устанавливать пакеты так:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9"># Устанавливаем пакет requests</span></span>
+<span class="line"><span style="color: #c9d1d9">pipenv install requests</span></span></code></pre><p>Если нужно установить пакет, который нам нужен только в разработке и не нужен в продакшене, то ставим с флагом <code>-d</code>:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv install -d pylint</span></span></code></pre><p>Удалить пакет можно командой <code>uninstall</code>:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv uninstall requests</span></span></code></pre><p>Несколько пакетов можно перечислять через пробел:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9"> # Устанавливаем Flask и Requests</span></span>
+<span class="line"><span style="color: #c9d1d9"> pipenv install flask requests</span></span></code></pre><h2 id="pipfile">Pipfile</h2><p>При создании окружения в папке с проектом появился файл Pipfile:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #C9D1D9">[[</span><span style="color: #FFA657">source</span><span style="color: #C9D1D9">]]</span></span>
+<span class="line"><span style="color: #C9D1D9">url = </span><span style="color: #A5D6FF">&quot;https://pypi.org/simple&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">verify_ssl = </span><span style="color: #79C0FF">true</span></span>
+<span class="line"><span style="color: #C9D1D9">name = </span><span style="color: #A5D6FF">&quot;pypi&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">[</span><span style="color: #FFA657">packages</span><span style="color: #C9D1D9">]</span></span>
+<span class="line"><span style="color: #C9D1D9">flask = </span><span style="color: #A5D6FF">&quot;*&quot;</span></span>
+<span class="line"><span style="color: #C9D1D9">flask-sqlalchemy = </span><span style="color: #A5D6FF">&quot;*&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">[</span><span style="color: #FFA657">dev-packages</span><span style="color: #C9D1D9">]</span></span>
+<span class="line"><span style="color: #C9D1D9">pylint = </span><span style="color: #A5D6FF">&quot;*&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C9D1D9">[</span><span style="color: #FFA657">requires</span><span style="color: #C9D1D9">]</span></span>
+<span class="line"><span style="color: #C9D1D9">python_version = </span><span style="color: #A5D6FF">&quot;3.9&quot;</span></span></code></pre><ul>
+<li><code>[[source]]</code> - источник, откуда скачиваются пакеты. По-умолчанию используется обычный PyPi.</li>
+<li><code>[packages]</code> - установленные пакеты</li>
+<li><code>[dev-packages]</code> - установленные пакеты для разработки</li>
+<li><code>[requires]</code> - требуемая версия Python</li>
+</ul><p>Когда мы устанавливаем пакет через <code>pipenv install</code> пакет автоматически добавляется в Pipfile. По-сути Pipfile - это прокаченный requirements.txt.</p><p>Через знак равно указывается версия пакета. По-умолчанию это звёздочка <code>*</code>, что означает последняя версия. Если мы установим какую-то определённую версию, то это отразится и в Pipfile.</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9"> pipenv install flask==1.1.2</span></span></code></pre><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #8B949E"># в Pipfile</span></span>
+<span class="line"><span style="color: #C9D1D9">flask = </span><span style="color: #A5D6FF">&quot;==1.1.2&quot;</span></span></code></pre><h2 id="pipfilelock">Pipfile.lock</h2><p>После установки пакетов в папке с проектом также появляется Pipfile.lock. Этот файл трогать не нужно. В нём закрепляются все используемые пакеты, их зависимости, их версии и хэши.</p><h2 id="установка-пакетов-существующего-проекта">Установка пакетов существующего проекта</h2><p>Pipenv делает установку проекта на новом компьютере/сервере проще. Pipfile и Pipfile.lock следует добавлять в git-репозиторий. Потом при клонировании репозитория на сервере нам будет достаточно установить Pipenv (<code>pip3 install pipenv</code>).  Зайдя в папку с проектом, вызываем:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv install</span></span></code></pre><p>Pipenv прочитает Pipfile и Pipfile.lock, создаст виртуальное окружение и установит все нужные пакеты и зависимости.</p><p>Если запускать Python нужно без виртуального окружения, то Pipenv может установить пакеты прямо в систему:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv install --system</span></span></code></pre><p>Если другой разработчик скачает ваш проект, то он может установить все пакеты, включая те, которые мы указывали как dev-пакеты:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv install --dev</span></span></code></pre><h2 id="выход-и-удаление-окружение">Выход и удаление окружение</h2><p>Чтобы выйти из виртуального окружения, выполняем:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">exit</span></span></code></pre><p>Удалить виртуальное окружение:</p><pre class="astro-code" style="background-color: #0d1117; overflow-x: auto;"><code><span class="line"><span style="color: #c9d1d9">pipenv --rm</span></span></code></pre><h2 id="минусы-pipenv">Минусы Pipenv</h2><p>К сожалению, Pipenv основывается на <code>virtualenv</code>, а не <code>venv</code>, что может в определённых ситуациях вызвать проблемы.</p><p>Также, процесс закрепления пакетов (<code>lock</code>), который происходит после каждой установки пакета, происходит очень долго. Иногда он может занимать какое-то неимоверное количество времени (10-20 минут, если пакеты большие).</p><h2 id="интеграция-в-vs-code">Интеграция в VS Code</h2><p>Чтобы VS Code нормально распознавал импорты в коде, нужно ему указать на интерпретатор Python, находящийся в нашем окружении.</p><ol>
+<li>Откройте поле для команд в VS Code, нажав <code>Ctrl + Shift + P</code>.</li>
+<li>Находим <strong>Python: Select Interpreter</strong>.</li>
+<li>Выбираем интерпретатор из нужного окружения (помечен pipenv).</li>
+</ol><p><img src="/assets/blog/images/image-20201220221624086.png" alt="image-20201220221624086"></p><p>Это создаст папку <code>.vscode</code> в проекте с информацией об используемом интерпретаторе.</p><h2 id="дополнительно">Дополнительно</h2><p>Также, Pipenv умеет подгружать переменные окружения из <code>.env</code> при активации и проверять пакеты на уязвимости через <code>pipenv check</code>.</p><h2 id="ссылки">Ссылки:</h2><ul>
+<li><a href="https://docs.pipenv.org/">Документация Pipenv</a></li>
+<li><a href="https://docs.python.org/3/library/venv.html">Документация venv</a></li>
+</ul><h2 id="подписывайтесь-в-телеграме-чтобы-узнавать-о-новых-полезных-постах">Подписывайтесь в Телеграме, чтобы узнавать о новых полезных постах</h2><p>Ссылка: <strong><a href="https://t.me/rokitsky_ru">Telegram канал Rokitsky_ru</a></strong></p>
+			</main>
+		</div>
+	</article>
+	<section class="astro-YVOLJZNM">
+		<div id="disqus_thread"></div>
+<script>let url = "https://rokitsky.ru/posts/pipenv-basic-usage/";
+let identifier = "pipenv-basic-usage";
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+
+    var disqus_config = function () {
+    this.page.url = url;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = identifier; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://rokitsky.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments.</a></noscript>
+	</section>
+</div>
+
+
+
+		</div>
+	</body></html>
